@@ -1,4 +1,5 @@
 #include "raylib.h"
+#include "game_manager.h"
 
 int main() {
     // Inisialisasi jendela
