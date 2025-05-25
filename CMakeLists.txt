@@ -3,11 +3,18 @@ project(UpperCup)
 
 set(CMAKE_CXX_STANDARD 11)
 
-include_directories(${CMAKE_SOURCE_DIR}/raylib-win/include)
+include_directories(
+    ${CMAKE_SOURCE_DIR}/raylib-win/include
+    ${CMAKE_SOURCE_DIR}/game/include
+)
+
 link_directories(${CMAKE_SOURCE_DIR}/raylib-win/lib)
 
 # Tambahkan source
-add_executable(game main.cpp)
+add_executable(game 
+main.cpp
+game/src/game_manager.cpp
+)
 
 if(WIN32)
     # Windows target
