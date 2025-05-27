@@ -12,8 +12,10 @@ link_directories(${CMAKE_SOURCE_DIR}/raylib-win/lib)
 
 # Tambahkan source
 add_executable(game 
-main.cpp
-game/src/game_manager.cpp
+    main.cpp
+    game/src/game_manager.cpp
+    game/src/renderable.cpp
+    game/src/cup.cpp
 )
 
 if(WIN32)
