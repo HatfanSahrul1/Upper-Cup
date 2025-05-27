@@ -1,6 +1,8 @@
 #pragma once
 
 #include <iostream>
+#include <vector>
+#include "objects.h"
 
 
 namespace UpperCup::Game
