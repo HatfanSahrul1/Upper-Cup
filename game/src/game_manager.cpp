@@ -24,6 +24,9 @@ namespace UpperCup::Game
 
     void GameManager::RenderObjects()
     {
-        cup_.Render();
+        for(auto* obj : Objects::RenderableObjects)
+        {
+            obj->Render();
+        }
     }
 }
