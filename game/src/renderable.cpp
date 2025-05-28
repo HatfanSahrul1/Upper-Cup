@@ -2,7 +2,12 @@
 
 namespace UpperCup::Objects
 {
-    static std::vector<Renderable*> RenderableObjects;
+    std::vector<Renderable*> RenderableObjects;
+
+    Renderable::Renderable()
+    {
+        AssignObject();
+    }
 
     void Renderable::AssignObject(){
         RenderableObjects.push_back(this);
