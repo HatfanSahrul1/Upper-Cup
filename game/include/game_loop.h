@@ -1,7 +1,7 @@
 #pragma once
 
 #include <iostream>
-
+#include "game_manager.h"
 
 namespace UpperCup::Game
 {
@@ -15,6 +15,7 @@ namespace UpperCup::Game
 
         private:
             bool isRunning;
+            GameManager* game_manager_ = GameManager::GetInstance();
 
     };
 }
