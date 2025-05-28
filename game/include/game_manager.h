@@ -12,9 +12,12 @@ namespace UpperCup::Game
         public:
             static GameManager* GetInstance();
 
+            void ProccesInput();
+            void RenderObjects();
         private:
             static GameManager* instance;
+            GameManager();
 
-            GameManager() = default;
+            UpperCup::Objects::Cup cup_;
     };
 }
