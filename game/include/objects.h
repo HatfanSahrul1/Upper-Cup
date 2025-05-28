@@ -11,13 +11,13 @@ namespace UpperCup::Objects
         public:
             Renderable();
             
-        virtual void Render() = 0;
-        virtual ~Renderable() = default;
-        
-        virtual void AssignObject();
+            virtual void Render() = 0;
+            virtual ~Renderable() = default;
+            
+            virtual void AssignObject();
 
     };
-
+    
     extern std::vector<Renderable*> RenderableObjects;
 
     class Cup : public Renderable
