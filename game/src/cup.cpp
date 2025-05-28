@@ -2,24 +2,26 @@
 
 namespace UpperCup::Objects
 {
-    Cup::Cup(Vector2 startPos) : position(startPos) {}
+    Cup::Cup(Vector2 startPos) 
+    : position_(startPos) 
+    {}
 
     void Cup::Render()
     {
         Rectangle cupBody = {
-            position.x - width/2, 
-            position.y - height/2, 
-            width, 
-            height
+            position_.x - WIDTH/2, 
+            position_.y - HEIGHT/2, 
+            WIDTH, 
+            HEIGHT
         };
         DrawRectangle(cupBody.x, cupBody.y, cupBody.width, cupBody.height, GRAY);
         DrawRectangleLines(cupBody.x, cupBody.y, cupBody.width, cupBody.height, BLACK);
         
         Rectangle handle = {
-            position.x + width/2, 
-            position.y - 10, 
+            position_.x - WIDTH * 0.70f, 
+            position_.y - 20, 
             8, 
-            20
+            35
         };
         DrawRectangleLines(handle.x, handle.y, handle.width, handle.height, BLACK);
     }
@@ -29,25 +31,25 @@ namespace UpperCup::Objects
         float dt = GetFrameTime();
 
         if (isJetpackActive) {
-            velocityY += lift * dt;
+            velocityY_ += LIFT * dt;
         } else {
-            velocityY += gravity * dt;
+            velocityY_ += GRAVITY * dt;
         }
 
-        position.y += velocityY * dt;
+        position_.y += velocityY_ * dt;
 
         // Batas atas & bawah
-        if (position.y < maxHeight) {
-            position.y = maxHeight;
-            velocityY = 0;
-        } else if (position.y > groundY) {
-            position.y = groundY;
-            velocityY = 0;
+        if (position_.y < MAX_HEIGHT) {
+            position_.y = MAX_HEIGHT;
+            velocityY_ = 0;
+        } else if (position_.y > GROUND_Y) {
+            position_.y = GROUND_Y;
+            velocityY_ = 0;
         }
     }
 
     
     Vector2 Cup::GetPosition() const {
-        return position;
+        return position_;
     }
 }

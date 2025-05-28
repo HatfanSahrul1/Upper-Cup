@@ -26,15 +26,15 @@ namespace UpperCup::Objects
             Vector2 GetPosition() const;
 
         private:
-            Vector2 position;
-            float velocityY = 0.0f;
+            Vector2 position_;
+            float velocityY_ = 0.0f;
 
-            const float gravity     = 500.0f;
-            const float lift        = -600.0f;
-            const float maxHeight   = 50.0f;
-            const float groundY     = 500.0f;
-            const float width       = 40.0f;
-            const float height      = 60.0f;
+            const float GRAVITY     = 500.0f;
+            const float LIFT        = -600.0f;
+            const float MAX_HEIGHT  = 50.0f;
+            const float GROUND_Y    = 500.0f;
+            const float WIDTH       = 40.0f;
+            const float HEIGHT      = 60.0f;
     };
 
     class Obstacle : public Renderable

@@ -12,7 +12,9 @@ namespace UpperCup::Game
         return instance;
     }
 
-    GameManager::GameManager() : cup_({100, 300}){}
+    GameManager::GameManager() 
+    : cup_({100, 300}), obs_({400, 100}, 300, 190)
+    {}
 
     void GameManager::ProccesInput()
     {
