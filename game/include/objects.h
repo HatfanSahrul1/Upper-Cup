@@ -45,5 +45,15 @@ namespace UpperCup::Objects
     class Obstacle : public Renderable
     {
         public:
+            Obstacle(Vector2 initPos, float length, float distance);
+
+            void Render() override;
+        private:
+            const float SIZE = 20;
+
+            Vector2 headPosition_;
+            float length_;
+            float distance_;
+
     };
 }
