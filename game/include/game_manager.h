@@ -3,7 +3,9 @@
 #include <iostream>
 #include <vector>
 #include "objects.h"
+#include "factories.h"
 
+using namespace UpperCup;
 
 namespace UpperCup::Game
 {
@@ -18,6 +20,7 @@ namespace UpperCup::Game
             static GameManager* instance;
             GameManager();
 
-            UpperCup::Objects::Cup cup_;
+            Objects::Cup cup_;
+            Objects::Obstacle obs_;
     };
 }
