@@ -12,9 +12,13 @@ namespace UpperCup::Game
         return instance;
     }
 
-    GameManager::GameManager() 
-    : cup_({100, 300}), obs_({400, 100}, 300, 190)
-    {}
+    GameManager::GameManager()
+    {
+        cup_ = Factories::CupFactory::CreateCup({100, 300});
+        obs_ = Factories::ObstacleFactory::CreateObstacle({400, 100}, 400, 800);
+        top_ = Factories::WallFactory::CreateWall("top", 600);
+        bottom_ = Factories::WallFactory::CreateWall("bottom", 600);
+    }
 
     void GameManager::ProccesInput()
     {
