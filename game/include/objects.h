@@ -56,4 +56,20 @@ namespace UpperCup::Objects
             float distance_;
 
     };
+
+    class Wall : public Renderable
+    {
+        public:
+            Wall() : Wall({0, 0}, 50) {}
+            Wall(Vector2 pos, float height);
+
+            void Render() override;
+
+        private:
+            Vector2 position_;
+            float height_;
+            
+            const float WIDTH = 1000;
+
+    };
 }
