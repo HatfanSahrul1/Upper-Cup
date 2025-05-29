@@ -23,7 +23,12 @@ namespace UpperCup::Game
     void GameManager::ProccesInput()
     {
         bool isJumping = IsKeyDown(KEY_SPACE);
-        cup_.Floating(isJumping);
+        cup_->Floating(isJumping);
+
+        if(IsKeyDown(KEY_V)){
+            float deltaT = GetFrameTime();
+            obs_->Move(deltaT);
+        }
     }
 
     void GameManager::RenderObjects()
