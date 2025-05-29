@@ -23,6 +23,7 @@ namespace UpperCup::Objects
     class Cup : public Renderable
     {
         public:
+            Cup() : Cup({0, 0}) {}
             Cup(Vector2 startPos);
 
             void Render() override;
@@ -37,7 +38,7 @@ namespace UpperCup::Objects
             const float GRAVITY     = 500.0f;
             const float LIFT        = -600.0f;
             const float MAX_HEIGHT  = 50.0f;
-            const float GROUND_Y    = 500.0f;
+            const float GROUND_Y    = 520.0f;
             const float WIDTH       = 40.0f;
             const float HEIGHT      = 60.0f;
     };
@@ -45,9 +46,12 @@ namespace UpperCup::Objects
     class Obstacle : public Renderable
     {
         public:
+            Obstacle() : Obstacle({0, 0}, 100, 100) {}
             Obstacle(Vector2 initPos, float length, float distance);
 
             void Render() override;
+
+            void Move(float deltaTime);
         private:
             const float SIZE = 20;
 

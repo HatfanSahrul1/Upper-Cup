@@ -18,4 +18,18 @@ namespace UpperCup::Objects
             RED
         );
     }
+
+    void Obstacle::Move(float deltaTime)
+    {
+        headPosition_.x -= 220.0 * deltaTime;
+    }
+
+    Wall::Wall(Vector2 pos, float height)
+    : position_(pos), height_(height)
+    {}
+
+    void Wall::Render()
+    {
+        DrawRectangle(position_.x, position_.y, WIDTH,  height_, BLACK);
+    }
 }
