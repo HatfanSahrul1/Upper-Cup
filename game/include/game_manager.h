@@ -2,6 +2,7 @@
 
 #include <iostream>
 #include <vector>
+#include "game_state.h"
 #include "objects.h"
 #include "factories.h"
 
@@ -20,7 +21,8 @@ namespace UpperCup::Game
             static GameManager* instance;
             GameManager();
 
-            Objects::Cup cup_;
-            Objects::Obstacle obs_;
+            std::shared_ptr<Objects::Cup> cup_;
+            std::shared_ptr<Objects::Obstacle> obs_;
+            std::shared_ptr<Objects::Wall> top_, bottom_;
     };
 }
