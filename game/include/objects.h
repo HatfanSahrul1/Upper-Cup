@@ -30,7 +30,7 @@ namespace UpperCup::Objects
 
             void Floating(bool isJetpackActive);
             Vector2 GetPosition() const;
-
+            void SetPosition(Vector2 pos);
         private:
             Vector2 position_;
             float velocityY_ = 0.0f;
