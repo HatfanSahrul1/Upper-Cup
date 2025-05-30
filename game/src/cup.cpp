@@ -52,4 +52,8 @@ namespace UpperCup::Objects
     Vector2 Cup::GetPosition() const {
         return position_;
     }
+
+    void Cup::SetPosition(Vector2 pos){
+        position_ = pos;
+    }
 }
