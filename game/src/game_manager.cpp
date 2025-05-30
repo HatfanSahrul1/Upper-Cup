@@ -18,10 +18,16 @@ namespace UpperCup::Game
         obs_ = Factories::ObstacleFactory::CreateObstacle({400, 100}, 400, 800);
         top_ = Factories::WallFactory::CreateWall("top", 600);
         bottom_ = Factories::WallFactory::CreateWall("bottom", 600);
+
+        currentState_ = std::make_shared<HomeScreen>();
+        currentState_->Enter();
     }
 
     void GameManager::ProccesInput()
     {
+        // if (currentState_) {
+        //     currentState_->MainState();
+        // }
         bool isJumping = IsKeyDown(KEY_SPACE);
         cup_->Floating(isJumping);
 
@@ -37,5 +43,22 @@ namespace UpperCup::Game
         {
             obj->Render();
         }
+    //    if (currentState_) {
+    //         currentState_->Render(); // Panggil render per state
+    //     }
+    }
+
+    void GameManager::ChangeState(std::shared_ptr<IGameState> newState)
+    {
+        if (currentState_)
+            currentState_->Exit();
+
+        currentState_ = newState;
+        currentState_->Enter();
+    }
+
+    std::shared_ptr<Objects::Cup> GameManager::GetCup()
+    {
+        return cup_;
     }
 }
