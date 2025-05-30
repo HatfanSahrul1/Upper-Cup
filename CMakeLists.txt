@@ -13,6 +13,8 @@ link_directories(${CMAKE_SOURCE_DIR}/raylib-win/lib)
 # Tambahkan source
 add_executable(game 
     main.cpp
+    game/src/home_screen.cpp
+    game/src/playing.cpp
     game/src/game_manager.cpp
     game/src/game_loop.cpp
     game/src/obstacle.cpp
