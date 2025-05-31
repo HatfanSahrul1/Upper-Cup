@@ -48,6 +48,11 @@ namespace UpperCup::Objects
         }
     }
 
+    void Cup::MoveAside()
+    {
+        float dt = GetFrameTime();
+        position_.x += 220.0 * dt;
+    }
     
     Vector2 Cup::GetPosition() const {
         return position_;

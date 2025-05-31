@@ -29,6 +29,7 @@ namespace UpperCup::Objects
             void Render() override;
 
             void Floating(bool isJetpackActive);
+            void MoveAside();
             Vector2 GetPosition() const;
             void SetPosition(Vector2 pos);
         private:
