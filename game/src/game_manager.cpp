@@ -14,10 +14,15 @@ namespace UpperCup::Game
 
     GameManager::GameManager()
     {
-        cup_ = Factories::CupFactory::CreateCup({100, 300});
+        cup_ = Factories::CupFactory::CreateCup({-100, 520});
         obs_ = Factories::ObstacleFactory::CreateObstacle({400, 100}, 400, 800);
         top_ = Factories::WallFactory::CreateWall("top", 600);
         bottom_ = Factories::WallFactory::CreateWall("bottom", 600);
+
+        camera_.offset = (Vector2){ 800/2.0f, 600/2.0f};
+        camera_.target = camera_.offset;
+        camera_.rotation = 0.0f;
+        camera_.zoom = 1.0f;
 
         currentState_ = std::make_shared<HomeScreen>();
         currentState_->Enter();
@@ -60,15 +65,32 @@ namespace UpperCup::Game
 
     void GameManager::ChangeState(std::shared_ptr<IGameState> newState)
     {
-        if (currentState_)
+        if (currentState_){
             currentState_->Exit();
+        }
 
         currentState_ = newState;
         currentState_->Enter();
+
+        local_state_ = 0;
     }
 
     std::shared_ptr<Objects::Cup> GameManager::GetCup()
     {
         return cup_;
+    }
+
+     Camera2D* GameManager::GetCamera() {
+        return &camera_;
+    }
+
+    void GameManager::SetScore(int& i)
+    {
+        score_ = i;
+    }
+
+    int GameManager::GetScore()
+    {
+        return score_;
     }
 }
