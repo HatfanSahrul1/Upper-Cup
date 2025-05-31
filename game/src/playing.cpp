@@ -17,6 +17,7 @@ namespace UpperCup::Game {
         }
         else
         {
+            game->GetObstacleManager()->CreateObstacle();
             done = true;
         }
         
@@ -65,6 +66,7 @@ namespace UpperCup::Game {
             DrawText("UPPERCUP", 200, 200, 60, BLACK);
             DrawText("Press SPACE to Jump & Play", 200, 300, 20, DARKGRAY);
 
+            game->GetObstacleManager()->RenderObstacles(); 
         EndMode2D();
             
         DrawText(TextFormat("Score: %.2d", game->GetScore()), 10, 30, 20, BLACK);
