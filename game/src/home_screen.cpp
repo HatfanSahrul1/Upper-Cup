@@ -12,7 +12,7 @@ namespace UpperCup::Game
         if (IsKeyPressed(KEY_SPACE)) {
             GameManager::GetInstance()->ChangeState(std::make_shared<Playing>());
         }
-        return true;
+        return false;
     }
 
     bool HomeScreen::Exit() {
