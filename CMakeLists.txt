@@ -15,6 +15,7 @@ add_executable(game
     main.cpp
     game/src/home_screen.cpp
     game/src/playing.cpp
+    game/src/game_over.cpp
     game/src/game_manager.cpp
     game/src/obstacle_manager.cpp
     game/src/game_loop.cpp
