@@ -25,27 +25,37 @@ namespace UpperCup::Game
 
     void GameManager::ProccesInput()
     {
-        // if (currentState_) {
-        //     currentState_->MainState();
-        // }
-        bool isJumping = IsKeyDown(KEY_SPACE);
-        cup_->Floating(isJumping);
+        switch (local_state_)
+        {
+        case 0:
+            if (currentState_->Enter()){
+                local_state_++;
+            }
+            break;
 
-        if(IsKeyDown(KEY_V)){
-            float deltaT = GetFrameTime();
-            obs_->Move(deltaT);
+        case 1:
+            if (currentState_->MainState()){
+                local_state_++;
+            }
+            break;
+        
+        case 2:
+            if (currentState_->Exit()){
+                local_state_ = 0;
+            }
+            break;
         }
     }
 
     void GameManager::RenderObjects()
     {
-        for(auto* obj : Objects::RenderableObjects)
-        {
-            obj->Render();
+        
+        if (currentState_) {
+            currentState_->Render();
         }
-    //    if (currentState_) {
-    //         currentState_->Render(); // Panggil render per state
-    //     }
+
+        top_->Render();
+        bottom_->Render();
     }
 
     void GameManager::ChangeState(std::shared_ptr<IGameState> newState)
