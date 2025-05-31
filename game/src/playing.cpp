@@ -6,19 +6,44 @@ namespace UpperCup::Game {
 
     bool Playing::Enter() {
         frameCount = 0;
-        return true;
+        static bool done = false;
+        frameCount++;
+        
+        auto cup = GameManager::GetInstance()->GetCup();
+        if (cup->GetPosition().x < 200) {
+            cup->MoveAside();
+            cup->Floating(false);
+            done = false;
+        }
+        else {
+            done  = true;
+        }
+        
+        return done;
     }
 
     bool Playing::MainState() {
-        frameCount++;
-        // Gerakkan cup hingga X = 200
         auto cup = GameManager::GetInstance()->GetCup();
-        if (cup->GetPosition().x < 200) {
-            Vector2 pos = cup->GetPosition();
-            pos.x += 2.0f;
-            cup->SetPosition(pos);
+        Camera2D* camera = GameManager::GetInstance()->GetCamera();
+
+        if (camera == nullptr || cup == nullptr) {
+            TraceLog(LOG_ERROR, "Camera or Cup is null!");
+            return false;
         }
-        return true;
+
+        int screenHeight = GetScreenHeight();
+        camera->target.x = cup->GetPosition().x + 200;
+        camera->target.y = screenHeight / 2.0f;
+
+        // Update cup
+        bool isJumping = IsKeyDown(KEY_SPACE);
+        cup->MoveAside();
+        cup->Floating(isJumping);
+
+        int score = cup->GetPosition().x * 0.1;
+        GameManager::GetInstance()->SetScore(score);
+
+    return false;
     }
 
     bool Playing::Exit() {
@@ -26,14 +51,20 @@ namespace UpperCup::Game {
     }
 
     void Playing::Render() {
-        // Teks "UPPERCUP" tetap muncul tapi bisa digerakkan
-        int titleX = 200 - frameCount * 2;
-        if (titleX > -400) {
-            DrawText("UPPERCUP", titleX, 100, 60, BLACK);
-        }
+        auto cup = GameManager::GetInstance()->GetCup();
+        auto camera = GameManager::GetInstance()->GetCamera();
 
-        // Gambar objek dari GameManager (cup, obstacles, dll)
-        GameManager::GetInstance()->RenderObjects();
+        if (!cup || !camera) return;
+
+        BeginMode2D(*camera);
+
+            cup->Render();
+            DrawText("UPPERCUP", 200, 200, 60, BLACK);
+            DrawText("Press SPACE to Jump & Play", 200, 300, 20, DARKGRAY);
+
+        EndMode2D();
+
+        DrawText(TextFormat("Score: %.2d", GameManager::GetInstance()->GetScore()), 10, 30, 20, BLACK);
     }
 
 }
