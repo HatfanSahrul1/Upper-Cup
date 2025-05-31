@@ -5,18 +5,19 @@
 namespace UpperCup::Game {
 
     bool Playing::Enter() {
-        frameCount = 0;
-        static bool done = false;
-        frameCount++;
-        
-        auto cup = GameManager::GetInstance()->GetCup();
+        auto game = GameManager::GetInstance();
+        bool done = false;
+        auto cup = game->GetCup();
+
         if (cup->GetPosition().x < 200) {
+            game->ResetCamera();
+
             cup->MoveAside();
             cup->Floating(false);
-            done = false;
         }
-        else {
-            done  = true;
+        else
+        {
+            done = true;
         }
         
         return done;
@@ -43,7 +44,7 @@ namespace UpperCup::Game {
         int score = cup->GetPosition().x * 0.1;
         GameManager::GetInstance()->SetScore(score);
 
-    return false;
+        return false;
     }
 
     bool Playing::Exit() {
@@ -51,20 +52,22 @@ namespace UpperCup::Game {
     }
 
     void Playing::Render() {
-        auto cup = GameManager::GetInstance()->GetCup();
-        auto camera = GameManager::GetInstance()->GetCamera();
+        auto game = GameManager::GetInstance();
+        auto cup = game->GetCup();
+        auto camera = game->GetCamera();
 
         if (!cup || !camera) return;
 
         BeginMode2D(*camera);
 
             cup->Render();
+            
             DrawText("UPPERCUP", 200, 200, 60, BLACK);
             DrawText("Press SPACE to Jump & Play", 200, 300, 20, DARKGRAY);
 
         EndMode2D();
-
-        DrawText(TextFormat("Score: %.2d", GameManager::GetInstance()->GetScore()), 10, 30, 20, BLACK);
+            
+        DrawText(TextFormat("Score: %.2d", game->GetScore()), 10, 30, 20, BLACK);
     }
 
 }
