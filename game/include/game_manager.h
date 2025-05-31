@@ -21,11 +21,17 @@ namespace UpperCup::Game
             void ChangeState(std::shared_ptr<IGameState> newState);
 
             std::shared_ptr<Objects::Cup> GetCup();
+            Camera2D* GetCamera();
+
+            void SetScore(int& i);
+            int GetScore();
         private:
             static GameManager* instance;
             GameManager();
+            int local_state_ = 0;
+            int score_ = 0;
 
-            Camera2D camera_;
+            Camera2D camera_ = {0};
 
             std::shared_ptr<IGameState> currentState_ = nullptr;
             std::shared_ptr<Objects::Cup> cup_;
