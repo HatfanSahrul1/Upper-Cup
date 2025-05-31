@@ -60,12 +60,11 @@ namespace UpperCup::Game {
         if (!cup || !camera) return;
 
         BeginMode2D(*camera);
-
-            cup->Render();
-            
             DrawText("UPPERCUP", 200, 200, 60, BLACK);
             DrawText("Press SPACE to Jump & Play", 200, 300, 20, DARKGRAY);
 
+            cup->Render();
+            
             game->GetObstacleManager()->RenderObstacles(); 
         EndMode2D();
             
