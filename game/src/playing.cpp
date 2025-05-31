@@ -2,8 +2,8 @@
 #include "game_manager.h"
 #include "raylib.h"
 
-namespace UpperCup::Game {
-
+namespace UpperCup::Game 
+{
     bool Playing::Enter() {
         auto game = GameManager::GetInstance();
         bool done = false;
@@ -25,8 +25,9 @@ namespace UpperCup::Game {
     }
 
     bool Playing::MainState() {
-        auto cup = GameManager::GetInstance()->GetCup();
-        Camera2D* camera = GameManager::GetInstance()->GetCamera();
+        auto game = GameManager::GetInstance();
+        auto cup = game->GetCup();
+        Camera2D* camera = game->GetCamera();
 
         if (camera == nullptr || cup == nullptr) {
             TraceLog(LOG_ERROR, "Camera or Cup is null!");
@@ -43,13 +44,23 @@ namespace UpperCup::Game {
         cup->Floating(isJumping);
 
         int score = cup->GetPosition().x * 0.1;
-        GameManager::GetInstance()->SetScore(score);
+        game->SetScore(score);
+
+        if(game->GetObstacleManager()->IsCollide(*cup->GetCollider())) return true;
 
         return false;
     }
 
     bool Playing::Exit() {
-        return true;
+        flashTimer -= GetFrameTime();
+        if (flashTimer > 0.0f) {
+            drawFlash_ = true;
+        } else {
+            flashTimer = 0.1f;
+            GameManager::GetInstance()->ChangeState(std::make_shared<GameOver>());
+            return true;
+        }
+        return false;
     }
 
     void Playing::Render() {
@@ -67,8 +78,10 @@ namespace UpperCup::Game {
             
             game->GetObstacleManager()->RenderObstacles(); 
         EndMode2D();
-            
+
         DrawText(TextFormat("Score: %.2d", game->GetScore()), 10, 30, 20, BLACK);
+
+        if(drawFlash_) DrawRectangle(0, 0, GetScreenWidth(), GetScreenHeight(), Fade(WHITE, 0.8f));
     }
 
 }

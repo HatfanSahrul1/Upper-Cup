@@ -21,6 +21,8 @@ namespace UpperCup::Game
             void CreateObstacle();
             void RenderObstacles();
 
+            bool IsCollide(Rectangle &other);
+
         private:
             std::vector<ObstacleProp> obs_init_ = {
                 {{400, 200}, 300, 700},

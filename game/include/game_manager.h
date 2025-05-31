@@ -23,6 +23,7 @@ namespace UpperCup::Game
 
             std::shared_ptr<Objects::Cup> GetCup();
             Camera2D* GetCamera();
+            void ResetCup();
             void ResetCamera();
 
             void SetScore(int& i);

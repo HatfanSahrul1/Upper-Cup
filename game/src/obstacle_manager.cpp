@@ -30,4 +30,14 @@ namespace UpperCup::Game
             obj->Render();
         }
     }
+
+    bool ObstacleManager::IsCollide(Rectangle &other)
+    {
+        for(auto obj : obstacles_)
+        {
+            if(obj->CheckCollision(other)) return true;
+        }
+
+        return false;
+    }
 }

@@ -57,13 +57,12 @@ namespace UpperCup::Objects
 
     bool Obstacle::CheckCollision(Rectangle &other)
     {
-        bool isCollide = false;
         for(auto rect : this->GetColliders())
         {
-            isCollide = CheckCollisionRecs(rect, other);
+            if(CheckCollisionRecs(rect, other)) return true;
         }
 
-        return isCollide;
+        return false;
     }
     #pragma endregion
 

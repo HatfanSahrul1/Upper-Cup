@@ -76,7 +76,12 @@ namespace UpperCup::Game
         return cup_;
     }
 
-     Camera2D* GameManager::GetCamera() {
+    void GameManager::ResetCup()
+    {
+        cup_->SetPosition({-100, 520});
+    }
+
+    Camera2D* GameManager::GetCamera() {
         return &camera_;
     }
 

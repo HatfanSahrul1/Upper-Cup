@@ -25,9 +25,6 @@ namespace UpperCup::Game
             bool MainState() override;
             bool Exit() override;
             void Render() override;
-
-        private:
-            bool playRequested = false;
     };
 
     class Playing : public IGameState
@@ -39,7 +36,9 @@ namespace UpperCup::Game
             void Render() override;
 
         private:
-            int frameCount;
+            float flashTimer = 0.1f;
+            bool isFlashing = false;
+            bool drawFlash_ = false;
     };
 
     class GameOver : public IGameState
