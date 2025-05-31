@@ -1,0 +1,48 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Configure with CMake",
+      "type": "shell",
+      "command": "cmake",
+      "args": ["-G", "MinGW Makefiles", ".."],
+      "options": {
+        "cwd": "${workspaceFolder}/build"
+      },
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "problemMatcher": ["$gcc"],
+      "detail": "Generate build files using CMake"
+    },
+    {
+      "label": "Build with mingw32-make",
+      "type": "shell",
+      "command": "mingw32-make",
+      "args": [],
+      "options": {
+        "cwd": "${workspaceFolder}/build"
+      },
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "problemMatcher": ["$gcc"],
+      "detail": "Build the project using mingw32-make"
+    },
+    {
+      "label": "Clean build",
+      "type": "shell",
+      "command": "mingw32-make",
+      "args": ["clean"],
+      "options": {
+        "cwd": "${workspaceFolder}/build"
+      },
+      "group": {
+        "kind": "build"
+      },
+      "problemMatcher": []
+    }
+  ]
+}
