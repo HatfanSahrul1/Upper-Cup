@@ -55,6 +55,9 @@ namespace UpperCup::Objects
             void Render() override;
 
             void Move(float deltaTime);
+
+            std::vector<Rectangle> GetColliders();
+            bool CheckCollision(Rectangle &other);
         private:
             const float SIZE = 20;
 

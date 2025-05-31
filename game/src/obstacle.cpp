@@ -2,6 +2,7 @@
 
 namespace UpperCup::Objects
 {
+    #pragma region Obstacle
     Obstacle::Obstacle(Vector2 initPos, float length, float distance)
     : headPosition_(initPos), length_(length), distance_(distance)
     {}
@@ -24,6 +25,49 @@ namespace UpperCup::Objects
         headPosition_.x -= 220.0 * deltaTime;
     }
 
+    std::vector<Rectangle> Obstacle::GetColliders() {
+        std::vector<Rectangle> colliders;
+
+        Rectangle topBox = {
+            headPosition_.x,
+            headPosition_.y,
+            SIZE,
+            SIZE
+        };
+        colliders.push_back(topBox);
+
+        Rectangle bottomBox = {
+            headPosition_.x,
+            headPosition_.y + length_,
+            SIZE,
+            SIZE
+        };
+        colliders.push_back(bottomBox);
+
+        Rectangle middleLine = {
+            headPosition_.x + SIZE / 2 - 1.5f, 
+            headPosition_.y + SIZE,
+            3.0f,
+            length_ - SIZE
+        };
+        colliders.push_back(middleLine);
+
+        return colliders;
+    }
+
+    bool Obstacle::CheckCollision(Rectangle &other)
+    {
+        bool isCollide = false;
+        for(auto rect : this->GetColliders())
+        {
+            isCollide = CheckCollisionRecs(rect, other);
+        }
+
+        return isCollide;
+    }
+    #pragma endregion
+
+    #pragma region Wall
     Wall::Wall(Vector2 pos, float height)
     : position_(pos), height_(height)
     {}
@@ -32,4 +76,5 @@ namespace UpperCup::Objects
     {
         DrawRectangle(position_.x, position_.y, WIDTH,  height_, BLACK);
     }
+    #pragma endregion
 }
