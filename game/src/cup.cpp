@@ -8,12 +8,15 @@ namespace UpperCup::Objects
 
     void Cup::Render()
     {
-        Rectangle cupBody = {
+        collider_ = {
             position_.x - WIDTH/2, 
             position_.y - HEIGHT/2, 
             WIDTH, 
             HEIGHT
         };
+        
+        Rectangle cupBody = collider_;
+
         DrawRectangle(cupBody.x, cupBody.y, cupBody.width, cupBody.height, GRAY);
         DrawRectangleLines(cupBody.x, cupBody.y, cupBody.width, cupBody.height, BLACK);
         
@@ -60,5 +63,10 @@ namespace UpperCup::Objects
 
     void Cup::SetPosition(Vector2 pos){
         position_ = pos;
+    }
+
+    Rectangle* Cup::GetCollider()
+    {
+        return &collider_;
     }
 }

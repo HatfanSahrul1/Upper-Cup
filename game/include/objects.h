@@ -31,10 +31,12 @@ namespace UpperCup::Objects
             void Floating(bool isJetpackActive);
             void MoveAside();
             Vector2 GetPosition() const;
+            Rectangle* GetCollider();
             void SetPosition(Vector2 pos);
         private:
             Vector2 position_;
             float velocityY_ = 0.0f;
+            Rectangle collider_;
 
             const float GRAVITY     = 500.0f;
             const float LIFT        = -600.0f;
