@@ -36,8 +36,7 @@ namespace UpperCup::Game
             void Render() override;
 
         private:
-            float flashTimer = 0.1f;
-            bool isFlashing = false;
+            float flashTimer_ = 0.1f;
             bool drawFlash_ = false;
     };
 
