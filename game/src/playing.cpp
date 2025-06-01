@@ -8,12 +8,14 @@ namespace UpperCup::Game
         auto game = GameManager::GetInstance();
         bool done = false;
         auto cup = game->GetCup();
+        int init_score = 0;
 
         if (cup->GetPosition().x < 200) {
             game->ResetCamera();
 
             cup->MoveAside();
             cup->Floating(false);
+            game->SetScore(init_score);
         }
         else
         {
@@ -42,6 +44,9 @@ namespace UpperCup::Game
         bool isJumping = IsKeyDown(KEY_SPACE);
         cup->MoveAside();
         cup->Floating(isJumping);
+
+        float cameraX = camera->target.x - 400;
+        game->GetObstacleManager()->CycleObstalce(cameraX);
 
         int score = cup->GetPosition().x * 0.1;
         game->SetScore(score);
