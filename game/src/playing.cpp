@@ -52,11 +52,11 @@ namespace UpperCup::Game
     }
 
     bool Playing::Exit() {
-        flashTimer -= GetFrameTime();
-        if (flashTimer > 0.0f) {
+        flashTimer_ -= GetFrameTime();
+        if (flashTimer_ > 0.0f) {
             drawFlash_ = true;
         } else {
-            flashTimer = 0.1f;
+            flashTimer_ = 0.1f;
             GameManager::GetInstance()->ChangeState(std::make_shared<GameOver>());
             return true;
         }
@@ -72,11 +72,11 @@ namespace UpperCup::Game
 
         BeginMode2D(*camera);
             DrawText("UPPERCUP", 200, 200, 60, BLACK);
-            DrawText("Press SPACE to Jump & Play", 200, 300, 20, DARKGRAY);
+            DrawText("Press [SPACE] to Jump & Play", 200, 300, 20, DARKGRAY);
 
             cup->Render();
             
-            game->GetObstacleManager()->RenderObstacles(); 
+            game->GetObstacleManager()->RenderObstacles();
         EndMode2D();
 
         DrawText(TextFormat("Score: %.2d", game->GetScore()), 10, 30, 20, BLACK);
