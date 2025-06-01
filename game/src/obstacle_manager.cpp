@@ -6,18 +6,17 @@ namespace UpperCup::Game
     {
         obstacles_.clear();
 
-        for(int i = 0; i < obs_init_.size(); i ++){
-            if(i == 0){
-                Vector2 pos = {GetScreenWidth() + obs_init_[i].pos.x, obs_init_[i].pos.y};
-                auto obs = Factories::ObstacleFactory::CreateObstacle(pos, obs_init_[i].length, obs_init_[i].dist);
-                obstacles_.push_back(obs);
+        for(int i = 0; i < obs_init_.size(); i++) {
+            Vector2 pos;
+            if(i == 0) {
+                pos = {GetScreenWidth() + obs_init_[i].pos.x, obs_init_[i].pos.y};
+            } else {
+                Vector2 prevPos = obstacles_[i - 1]->GetPosition();
+                pos = {prevPos.x + obs_init_[i].dist, obs_init_[i].pos.y};
             }
-            else
-            {
-                Vector2 pos = {obs_init_[i].dist + obs_init_[i-1].pos.x, obs_init_[i].pos.y};
-                auto obs = Factories::ObstacleFactory::CreateObstacle(pos, obs_init_[i].length, obs_init_[i].dist);
-                obstacles_.push_back(obs);
-            }
+
+            auto obs = Factories::ObstacleFactory::CreateObstacle(pos, obs_init_[i].length, obs_init_[i].dist);
+            obstacles_.push_back(obs);
         }
     }
 
