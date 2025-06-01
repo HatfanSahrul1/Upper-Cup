@@ -56,6 +56,9 @@ namespace UpperCup::Objects
 
             void Move(float deltaTime);
 
+            Vector2 GetPosition();
+            void SetPositionBehindX(float newX);
+
             std::vector<Rectangle> GetColliders();
             bool CheckCollision(Rectangle &other);
         private:

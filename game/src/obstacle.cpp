@@ -64,6 +64,16 @@ namespace UpperCup::Objects
 
         return false;
     }
+
+    Vector2 Obstacle::GetPosition()
+    {
+        return headPosition_;
+    }
+
+    void Obstacle::SetPositionBehindX(float newX)
+    {
+        headPosition_.x = newX + distance_;
+    }
     #pragma endregion
 
     #pragma region Wall
