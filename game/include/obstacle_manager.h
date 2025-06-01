@@ -20,6 +20,7 @@ namespace UpperCup::Game
         public:
             void CreateObstacle();
             void RenderObstacles();
+            void CycleObstalce(float cameraX);
 
             bool IsCollide(Rectangle &other);
 

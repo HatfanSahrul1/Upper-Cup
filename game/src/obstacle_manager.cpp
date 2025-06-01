@@ -30,6 +30,21 @@ namespace UpperCup::Game
         }
     }
 
+    void ObstacleManager::CycleObstalce(float cameraX) {
+        if (obstacles_.empty()) return;
+
+        int obs_size = obstacles_.size();
+
+        for (int i = 0; i < obs_size; i++) {
+            if (obstacles_[i]->GetPosition().x + 20 < cameraX - 100) {
+                int behind = (obs_size + (i-1)) % obs_size;
+                float x = obstacles_[behind]->GetPosition().x;
+
+                obstacles_[i]->SetPositionBehindX(x);
+            }
+        }
+}
+
     bool ObstacleManager::IsCollide(Rectangle &other)
     {
         for(auto obj : obstacles_)
