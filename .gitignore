@@ -2,3 +2,4 @@ build-linux
 build-win
 win-build
 build
+.vs
