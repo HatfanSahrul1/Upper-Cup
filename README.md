@@ -12,9 +12,10 @@ Proyek ini merupakan implementasi tugas akhir untuk mata kuliah **Design Pattern
 project-root/
 │
 ├── game/
-│ └── src/ # Source code utama
+│ └── src/ 
+│ └── include/ 
 │
-├── image/ # Gambar/asset (cup.png, dll)
+├── image/ # Gambar/asset (pesawat.png, dll)
 │
 ├── build/ # Folder hasil build (berisi game.exe)
 │
