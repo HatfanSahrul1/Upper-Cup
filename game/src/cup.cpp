@@ -4,7 +4,14 @@ namespace UpperCup::Objects
 {
     Cup::Cup(Vector2 startPos) 
     : position_(startPos) 
-    {}
+    {
+        cupTexture_ = LoadTexture("../image/pesawat.png");
+    }
+
+    Cup::~Cup()
+    {
+        UnloadTexture(cupTexture_);
+    }
 
     void Cup::Render()
     {
@@ -27,6 +34,33 @@ namespace UpperCup::Objects
             35
         };
         DrawRectangleLines(handle.x, handle.y, handle.width, handle.height, BLACK);
+
+        Rectangle sourceRect = {
+            0.0f,
+            0.0f,
+            -static_cast<float>(cupTexture_.width),
+            static_cast<float>(cupTexture_.height)
+        };
+
+        // Tujuan (dest) rectangle: di mana dan seberapa besar gambar akan ditampilkan
+        Rectangle destRect = {
+            position_.x - WIDTH / 2.0f,
+            position_.y - HEIGHT / 2.0f,
+            WIDTH,
+            HEIGHT
+        };
+
+        Vector2 origin = { 0.0f, 0.0f };
+
+        // Gambar tekstur ke layar dengan skala agar lebarnya = WIDTH, tingginya = HEIGHT
+        DrawTexturePro(
+            cupTexture_,
+            sourceRect,
+            destRect,
+            origin,
+            0.0f,
+            WHITE
+        );
     }
 
     void Cup::Floating(bool isJetpackActive)

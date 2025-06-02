@@ -7,6 +7,8 @@ namespace UpperCup::Game
         InitWindow(800, 600, "Upper Cup");
         SetTargetFPS(60);
 
+        game_manager_ = GameManager::GetInstance();
+
         while (!WindowShouldClose())
         {
             Update();

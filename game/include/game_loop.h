@@ -15,7 +15,7 @@ namespace UpperCup::Game
 
         private:
             bool isRunning;
-            GameManager* game_manager_ = GameManager::GetInstance();
+            GameManager* game_manager_ = nullptr;
 
     };
 }

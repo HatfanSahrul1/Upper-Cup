@@ -25,6 +25,7 @@ namespace UpperCup::Objects
         public:
             Cup() : Cup({0, 0}) {}
             Cup(Vector2 startPos);
+            ~Cup();
 
             void Render() override;
 
@@ -37,6 +38,8 @@ namespace UpperCup::Objects
             Vector2 position_;
             float velocityY_ = 0.0f;
             Rectangle collider_;
+
+            Texture2D cupTexture_;
 
             const float GRAVITY     = 500.0f;
             const float LIFT        = -600.0f;
