@@ -37,7 +37,7 @@ project-root/
 ![Demo Gameplay](UpperCup.gif)
 
 ## Diagram UML
-<!-- ![Mermaid Diagram](https://mermaidviewer.com/api/diagrams/cmbglq27p004wkc1cuf62xv60/image) -->
+![Mermaid Diagram](https://mermaidviewer.com/api/diagrams/cmbglq27p004wkc1cuf62xv60/image)
 ```mermaid
 classDiagram
     %% Main Game Loop
