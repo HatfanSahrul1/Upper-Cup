@@ -3,6 +3,7 @@
 #include <iostream>
 #include <vector>
 #include "raylib.h"
+#include "math.h"
 
 namespace UpperCup::Objects
 {    
@@ -19,6 +20,12 @@ namespace UpperCup::Objects
     };
     
     extern std::vector<Renderable*> RenderableObjects;
+
+    struct ShatterPiece {
+        Vector2 position;
+        Vector2 velocity;
+        float size;
+    };
 
     class Cup : public Renderable
     {
