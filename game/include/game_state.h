@@ -6,6 +6,7 @@
 #include "raylib.h"
 #include "objects.h"
 
+using namespace UpperCup;
 
 namespace UpperCup::Game
 {
@@ -42,7 +43,7 @@ namespace UpperCup::Game
 
              // Efek hancur
             bool isShattered_ = false;
-            std::vector<ShatterPiece> pieces_;
+            std::vector<Objects::ShatterPiece> pieces_;
 
             // Fungsi tambahan
             void CreateShatterEffect(Vector2 cupPos);
