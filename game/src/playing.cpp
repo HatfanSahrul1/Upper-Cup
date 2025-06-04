@@ -86,11 +86,11 @@ namespace UpperCup::Game
     }
 
     // Setelah 2 detik, ganti ke GameOver
-    static float exitTimer = 2.0f;
+    static float exitTimer = 0.5f;
     exitTimer -= deltaTime;
 
     if (exitTimer <= 0.0f) {
-        exitTimer = 2.0f;
+        exitTimer = 0.5f;
         game->ChangeState(std::make_shared<GameOver>());
         return true;
     }
