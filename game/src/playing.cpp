@@ -122,7 +122,7 @@ namespace UpperCup::Game
                     piece.position.y,
                     piece.size,
                     piece.size,
-                    RED
+                    DARKGRAY
                 );
             }
 
