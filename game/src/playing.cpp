@@ -57,26 +57,46 @@ namespace UpperCup::Game
     }
 
     bool Playing::Exit() {
-        auto game = GameManager::GetInstance();
-        auto cup = game->GetCup();
+    auto game = GameManager::GetInstance();
+    auto cup = game->GetCup();
 
-        if (!isShattered_) {
-            // Trigger efek hancur
-            CreateShatterEffect(cup->GetPosition());
-            isShattered_ = true;
-        }
-
-        // Timer untuk flash
-        flashTimer_ -= GetFrameTime();
-        if (flashTimer_ > 0.0f) {
-            drawFlash_ = true;
-        } else {
-            flashTimer_ = 0.1f;
-            GameManager::GetInstance()->ChangeState(std::make_shared<GameOver>());
-            return true;
-        }
-        return false;
+    if (!isShattered_) {
+        // Trigger efek hancur
+        CreateShatterEffect(cup->GetPosition());
+        isShattered_ = true;
     }
+
+    // Timer untuk flash
+    flashTimer_ -= GetFrameTime();
+    drawFlash_ = (flashTimer_ > 0.0f);
+
+    // Jitter kamera
+    Camera2D* camera = game->GetCamera();
+    if (camera) {
+        camera->target.x += GetRandomValue(-5, 5); // jitter x
+        camera->target.y += GetRandomValue(-5, 5); // jitter y
+    }
+
+    // Update kepingan
+    float deltaTime = GetFrameTime();
+    for (auto& piece : pieces_) {
+        piece.position.x += piece.velocity.x * deltaTime;
+        piece.position.y += piece.velocity.y * deltaTime;
+        piece.velocity.y += 500.0f * deltaTime; // gravitasi
+    }
+
+    // Setelah 2 detik, ganti ke GameOver
+    static float exitTimer = 2.0f;
+    exitTimer -= deltaTime;
+
+    if (exitTimer <= 0.0f) {
+        exitTimer = 2.0f;
+        game->ChangeState(std::make_shared<GameOver>());
+        return true;
+    }
+
+    return false;
+}
 
     void Playing::Render() {
         auto game = GameManager::GetInstance();
