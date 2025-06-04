@@ -42,7 +42,6 @@ namespace UpperCup::Objects
             static_cast<float>(cupTexture_.height)
         };
 
-        // Tujuan (dest) rectangle: di mana dan seberapa besar gambar akan ditampilkan
         Rectangle destRect = {
             position_.x - WIDTH / 2.0f,
             position_.y - HEIGHT / 2.0f,
@@ -52,7 +51,6 @@ namespace UpperCup::Objects
 
         Vector2 origin = { 0.0f, 0.0f };
 
-        // Gambar tekstur ke layar dengan skala agar lebarnya = WIDTH, tingginya = HEIGHT
         DrawTexturePro(
             cupTexture_,
             sourceRect,
@@ -75,7 +73,6 @@ namespace UpperCup::Objects
 
         position_.y += velocityY_ * dt;
 
-        // Batas atas & bawah
         if (position_.y < MAX_HEIGHT) {
             position_.y = MAX_HEIGHT;
             velocityY_ = 0;

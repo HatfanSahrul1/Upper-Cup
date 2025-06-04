@@ -41,11 +41,9 @@ namespace UpperCup::Game
             float flashTimer_ = 0.1f;
             bool drawFlash_ = false;
 
-             // Efek hancur
             bool isShattered_ = false;
             std::vector<Objects::ShatterPiece> pieces_;
 
-            // Fungsi tambahan
             void CreateShatterEffect(Vector2 cupPos);
     };
 

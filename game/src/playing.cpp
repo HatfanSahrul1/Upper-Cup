@@ -61,31 +61,26 @@ namespace UpperCup::Game
     auto cup = game->GetCup();
 
     if (!isShattered_) {
-        // Trigger efek hancur
         CreateShatterEffect(cup->GetPosition());
         isShattered_ = true;
     }
 
-    // Timer untuk flash
     flashTimer_ -= GetFrameTime();
     drawFlash_ = (flashTimer_ > 0.0f);
 
-    // Jitter kamera
     Camera2D* camera = game->GetCamera();
     if (camera) {
-        camera->target.x += GetRandomValue(-5, 5); // jitter x
-        camera->target.y += GetRandomValue(-5, 5); // jitter y
+        camera->target.x += GetRandomValue(-5, 5);
+        camera->target.y += GetRandomValue(-5, 5);
     }
 
-    // Update kepingan
     float deltaTime = GetFrameTime();
     for (auto& piece : pieces_) {
         piece.position.x += piece.velocity.x * deltaTime;
         piece.position.y += piece.velocity.y * deltaTime;
-        piece.velocity.y += 500.0f * deltaTime; // gravitasi
+        piece.velocity.y += 500.0f * deltaTime;
     }
 
-    // Setelah 2 detik, ganti ke GameOver
     static float exitTimer = 0.5f;
     exitTimer -= deltaTime;
 
@@ -108,14 +103,12 @@ namespace UpperCup::Game
             DrawText("UPPERCUP", 200, 200, 60, BLACK);
             DrawText("Press [SPACE] to Jump & Play", 200, 300, 20, DARKGRAY);
 
-            // Render cup hanya jika belum hancur
             if (!isShattered_) {
                 cup->Render();
             }
 
             game->GetObstacleManager()->RenderObstacles();
 
-            // Render kepingan
             for (const auto& piece : pieces_) {
                 DrawRectangle(
                     piece.position.x,
@@ -128,10 +121,8 @@ namespace UpperCup::Game
 
         EndMode2D();
 
-        // UI statis
         DrawText(TextFormat("Score: %.2d", game->GetScore()), 10, 30, 20, BLACK);
 
-        // Flash merah saat tabrakan
         if (drawFlash_) {
             DrawRectangle(0, 0, GetScreenWidth(), GetScreenHeight(), Fade(RED, 0.3f));
         }
@@ -140,7 +131,7 @@ namespace UpperCup::Game
 
     void Playing::CreateShatterEffect(Vector2 cupPos)
     {
-        const int pieceCount = 8; // jumlah kepingan
+        const int pieceCount = 8; 
         const float baseSize = 10.0f;
 
         for (int i = 0; i < pieceCount; ++i) {
