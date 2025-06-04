@@ -57,6 +57,16 @@ namespace UpperCup::Game
     }
 
     bool Playing::Exit() {
+        auto game = GameManager::GetInstance();
+        auto cup = game->GetCup();
+
+        if (!isShattered_) {
+            // Trigger efek hancur
+            CreateShatterEffect(cup->GetPosition());
+            isShattered_ = true;
+        }
+
+        // Timer untuk flash
         flashTimer_ -= GetFrameTime();
         if (flashTimer_ > 0.0f) {
             drawFlash_ = true;
@@ -89,4 +99,26 @@ namespace UpperCup::Game
         if(drawFlash_) DrawRectangle(0, 0, GetScreenWidth(), GetScreenHeight(), Fade(WHITE, 0.8f));
     }
 
+
+    void Playing::CreateShatterEffect(Vector2 cupPos)
+    {
+        const int pieceCount = 8; // jumlah kepingan
+        const float baseSize = 10.0f;
+
+        for (int i = 0; i < pieceCount; ++i) {
+            float angle = GetRandomValue(0, 360) * DEG2RAD;
+            float speed = GetRandomValue(200, 500);
+
+            Vector2 velocity = {
+                cosf(angle) * speed,
+                sinf(angle) * speed
+            };
+
+            pieces_.push_back({
+                {cupPos.x, cupPos.y},
+                velocity,
+                baseSize
+            });
+        }
+    }
 }
