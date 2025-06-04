@@ -35,8 +35,6 @@ namespace UpperCup::Game
 
         BeginMode2D(*camera);
 
-            cup->Render();
-            
             game->GetObstacleManager()->RenderObstacles(); 
         EndMode2D();
 
