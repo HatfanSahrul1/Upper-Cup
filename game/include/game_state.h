@@ -4,6 +4,7 @@
 #include <vector>
 #include <memory>
 #include "raylib.h"
+#include "objects.h"
 
 
 namespace UpperCup::Game
@@ -38,6 +39,13 @@ namespace UpperCup::Game
         private:
             float flashTimer_ = 0.1f;
             bool drawFlash_ = false;
+
+             // Efek hancur
+            bool isShattered_ = false;
+            std::vector<ShatterPiece> pieces_;
+
+            // Fungsi tambahan
+            void CreateShatterEffect(Vector2 cupPos);
     };
 
     class GameOver : public IGameState
