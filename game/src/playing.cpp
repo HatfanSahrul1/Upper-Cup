@@ -96,27 +96,45 @@ namespace UpperCup::Game
     }
 
     return false;
-}
+    }
 
     void Playing::Render() {
         auto game = GameManager::GetInstance();
         auto cup = game->GetCup();
         auto camera = game->GetCamera();
 
-        if (!cup || !camera) return;
-
         BeginMode2D(*camera);
+
             DrawText("UPPERCUP", 200, 200, 60, BLACK);
             DrawText("Press [SPACE] to Jump & Play", 200, 300, 20, DARKGRAY);
 
-            cup->Render();
-            
+            // Render cup hanya jika belum hancur
+            if (!isShattered_) {
+                cup->Render();
+            }
+
             game->GetObstacleManager()->RenderObstacles();
+
+            // Render kepingan
+            for (const auto& piece : pieces_) {
+                DrawRectangle(
+                    piece.position.x,
+                    piece.position.y,
+                    piece.size,
+                    piece.size,
+                    RED
+                );
+            }
+
         EndMode2D();
 
+        // UI statis
         DrawText(TextFormat("Score: %.2d", game->GetScore()), 10, 30, 20, BLACK);
 
-        if(drawFlash_) DrawRectangle(0, 0, GetScreenWidth(), GetScreenHeight(), Fade(WHITE, 0.8f));
+        // Flash merah saat tabrakan
+        if (drawFlash_) {
+            DrawRectangle(0, 0, GetScreenWidth(), GetScreenHeight(), Fade(RED, 0.3f));
+        }
     }
 
 
